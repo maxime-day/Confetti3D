@@ -8,6 +8,7 @@
 - 🏎️ Optimized for performance using SceneKit  
 - 📱 Works seamlessly with both SwiftUI and UIKit  
 - 🛠️ Simple and easy-to-use API  
+- 📡 **Interactive effects**: Confetti adapts to the device's **accelerometer**, reacting to movements for a more immersive experience  
 
 ![Confetti GIF](confetti.gif)
 ![Glitter GIF](glitter.gif)
@@ -29,19 +30,12 @@ struct Confetti3DTestView: View {
 
     var body: some View {
         ZStack {
-            Text("🎉 Confetti time! 🎉")
-                .foregroundColor(.white)
             confettiView
         }
-        .background(.black)
-        .onTapGesture {
+        .onAppear {
             confettiView.throwConfetti()
         }
     }
-}
-
-#Preview {
-    Confetti3DTestView()
 }
 ```
 
@@ -57,16 +51,6 @@ let customConfetti = [
                  color: .green),
         C3DConfetti(image: UIImage(named: "confetti_03")!,
                  color: .yellow),
-        C3DConfetti(image: UIImage(named: "confetti_04")!,
-                 color: .purple),
-        C3DConfetti(image: UIImage(named: "confetti_05")!,
-                 color: .red),
-        C3DConfetti(image: UIImage(named: "confetti_06")!,
-                 color: .cyan),
-        C3DConfetti(image: UIImage(named: "confetti_07")!,
-                 color: UIColor(red: 1, green: 0.1, blue: 0, alpha: 1)), // Orange
-        C3DConfetti(image: UIImage(named: "confetti_08")!,
-                 color: UIColor(red: 1, green: 0.2, blue: 0, alpha: 1)), // Gold
     ]
 ```
 
