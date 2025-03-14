@@ -1,6 +1,6 @@
-# 🎉 ConfettiKit
+# 🎉 Confetti3D
 
-**ConfettiKit** is a lightweight and customizable Swift package that allows you to easily add confetti effects to your iOS applications using **SwiftUI** or **UIKit**. Under the hood, it leverages **SceneKit** to provide smooth and efficient 3D confetti animations.
+**Confetti3D** is a lightweight and customizable Swift package that allows you to easily add confetti effects to your iOS applications using **SwiftUI** or **UIKit**. Under the hood, it leverages **SceneKit** to provide smooth and efficient 3D confetti animations.
 
 ## ✨ Features
 
@@ -15,7 +15,7 @@
 
 ## 📦 Installation
 
-ConfettiKit is available via **Swift Package Manager (SPM)**. To install it, add the following dependency to your `Package.swift`:
+Confetti3D is available via **Swift Package Manager (SPM)**. To install it, add the following dependency to your `Package.swift`:
 
 ```swift
 .package(url: "https://github.com/maxime-day/Confetti3D.git", from: "1.0.0")
