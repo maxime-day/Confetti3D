@@ -30,7 +30,7 @@ public struct C3DConfettiOptions: Sendable {
 extension C3DConfettiOptions {
     public static let defaultOptions = C3DConfettiOptions(confetti: Constants.defaultConfetti,
                                                          isAffectedByGravity: true,
-                                                         birthRate: 20,
+                                                         birthRate: 40,
                                                          emissionDuration: 3,
                                                          lifeSpan: 10)
 }

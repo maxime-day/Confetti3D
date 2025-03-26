@@ -103,8 +103,10 @@ public final class UIC3DView: SCNView, ConfettiThrower {
 
     private func setupConfetti(with options: C3DConfettiOptions) {
         let confetti = options.confetti
+        
+        let nbVariations = 2
 
-        for _ in 1...2 {
+        for _ in 1...nbVariations {
             for confetto in confetti {
                 let particleSystem = SCNParticleSystem()
                 particleSystem.particleImage = confetto.image
@@ -112,7 +114,7 @@ public final class UIC3DView: SCNView, ConfettiThrower {
                 particleSystem.particleColorVariation = SCNVector4(0, 0, 0, 0)
 
                 // Emitter
-                particleSystem.birthRate = CGFloat(options.birthRate)
+                particleSystem.birthRate = CGFloat(options.birthRate / nbVariations)
                 particleSystem.emissionDuration = options.emissionDuration
                 particleSystem.emittingDirection = SCNVector3(0, 1, 0)
                 particleSystem.spreadingAngle = 40
@@ -161,17 +163,19 @@ public final class UIC3DView: SCNView, ConfettiThrower {
     }
 
     private func setupGlitter(with options: C3DGlitterOptions) {
+        
+        let nbVariations = 20
 
         var isWhite = false
+        for index in 1...nbVariations {
 
-        for _ in 1...2 {
             let particleSystem = SCNParticleSystem()
             particleSystem.particleImage = UIImage(named: "confetti_08", in: .module, with: nil)!
             particleSystem.particleColor = isWhite ? .white.withAlphaComponent(0.7) : UIColor(red: 1, green: 0.2, blue: 0, alpha: 0.5) // gold
             particleSystem.particleColorVariation = SCNVector4(0.01, 0.01, 0, 0)
 
             // Emitter
-            particleSystem.birthRate = CGFloat(isWhite ? options.birthRate / 2 : options.birthRate)
+            particleSystem.birthRate = CGFloat(options.birthRate / nbVariations)
             particleSystem.emissionDuration = options.emissionDuration
             particleSystem.birthDirection = .random
 

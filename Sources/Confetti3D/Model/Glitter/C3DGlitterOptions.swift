@@ -26,7 +26,7 @@ public struct C3DGlitterOptions: Sendable {
 
 extension C3DGlitterOptions {
     public static let defaultOptions = C3DGlitterOptions(isAffectedByGravity: true,
-                                                      birthRate: 1000,
+                                                      birthRate: 2000,
                                                       emissionDuration: 0.2,
                                                       lifeSpan: 10)
 }
