@@ -166,12 +166,20 @@ public final class UIC3DView: SCNView, ConfettiThrower {
         
         let nbVariations = 20
 
-        var isWhite = false
         for index in 1...nbVariations {
 
             let particleSystem = SCNParticleSystem()
             particleSystem.particleImage = UIImage(named: "confetti_08", in: .module, with: nil)!
-            particleSystem.particleColor = isWhite ? .white.withAlphaComponent(0.7) : UIColor(red: 1, green: 0.2, blue: 0, alpha: 0.5) // gold
+
+            particleSystem.particleColor = switch index {
+            case 1, 2, 3:
+                UIColor.white.withAlphaComponent(0.8)
+            case 4:
+                UIColor.blue.withAlphaComponent(0.7)
+            default:
+                UIColor(red: 1, green: 0.2, blue: 0, alpha: 0.5) // gold
+            }
+
             particleSystem.particleColorVariation = SCNVector4(0.01, 0.01, 0, 0)
 
             // Emitter
@@ -211,8 +219,6 @@ public final class UIC3DView: SCNView, ConfettiThrower {
             particleSystemNode.position = SCNVector3(0, 0.5, 0)
             particleSystemNode.addParticleSystem(particleSystem)
             mainParticlesNode.addChildNode(particleSystemNode)
-
-            isWhite.toggle()
             
             particleSystemNode.runAction(.fadeOut(duration: options.lifeSpan))
         }
