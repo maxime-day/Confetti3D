@@ -129,7 +129,7 @@ public final class UIC3DView: SCNView, ConfettiThrower {
                 // Image
                 particleSystem.particleSize = 0.05
                 particleSystem.particleSizeVariation = 0.05
-                particleSystem.particleIntensity = 20
+                
                 // Rendering
                 particleSystem.isBlackPassEnabled = true
                 particleSystem.writesToDepthBuffer = true
@@ -172,12 +172,24 @@ public final class UIC3DView: SCNView, ConfettiThrower {
             particleSystem.particleImage = UIImage(named: "confetti_08", in: .module, with: nil)!
 
             particleSystem.particleColor = switch index {
-            case 1, 2, 3:
-                UIColor.white.withAlphaComponent(0.8)
-            case 4:
-                UIColor.blue.withAlphaComponent(0.7)
+            case 1...4:
+                // Champagne pink – soft, warm highlight
+                UIColor(red: 1.0, green: 0.84, blue: 0.72, alpha: 1.0)
+            case 5...8:
+                // Light copper – warm and vibrant orange tone
+                UIColor(red: 0.95, green: 0.6, blue: 0.3, alpha: 1.0)
+            case 9...12:
+                // Warm bronze – deep, rich brown-gold
+                UIColor(red: 0.6, green: 0.4, blue: 0.2, alpha: 1.0)
+            case 13...16:
+                // Deep rose gold – strong, saturated warm pink
+                UIColor(red: 0.85, green: 0.5, blue: 0.4, alpha: 1.0)
+            case 17...20:
+                // Classic warm gold – balanced and bright
+                UIColor(red: 1.0, green: 0.78, blue: 0.2, alpha: 1.0)
             default:
-                UIColor(red: 1, green: 0.2, blue: 0, alpha: 0.5) // gold
+                // Fallback to warm gold
+                UIColor(red: 1.0, green: 0.78, blue: 0.2, alpha: 1.0)
             }
 
             particleSystem.particleColorVariation = SCNVector4(0.01, 0.01, 0, 0)
@@ -200,7 +212,7 @@ public final class UIC3DView: SCNView, ConfettiThrower {
             // Image
             particleSystem.particleSize = 0.05
             particleSystem.particleSizeVariation = 0.01
-            particleSystem.particleIntensity = 20
+            
             // Rendering
             particleSystem.isBlackPassEnabled = true
             particleSystem.writesToDepthBuffer = true
