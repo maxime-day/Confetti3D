@@ -63,7 +63,8 @@ confettiView.throwConfetti(type: .confetti(C3DConfettiOptions(confetti: customCo
                                                               isAffectedByGravity: true,
                                                               birthRate: 20,
                                                               emissionDuration: 3,
-                                                              lifeSpan: 15)))
+                                                              lifeSpan: 15,
+                                                              size: 1)))
 ``` 
 
 The `glitter` type also has the same parameters for now. 

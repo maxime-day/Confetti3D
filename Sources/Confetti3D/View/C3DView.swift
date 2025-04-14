@@ -6,11 +6,20 @@ import CoreMotion
 import SwiftUI
 import Combine
 
+/// A protocol that defines the ability to trigger a confetti effect.
 public protocol ConfettiThrower {
+    /// Triggers the confetti animation using the specified type.
+    ///
+    /// - Parameter type: The type of confetti effect to throw (e.g., `.confetti`, `.glitter`).
     func throwConfetti(type: C3DConfettiType)
 }
 
-// For SwiftUI
+// MARK: - SwiftUI
+
+/// A SwiftUI-compatible wrapper for displaying and triggering 3D confetti effects.
+///
+/// Internally wraps a `UIC3DView` and conforms to `ConfettiThrower`
+/// for triggering effects programmatically.
 public struct C3DView: UIViewRepresentable, ConfettiThrower {
     public typealias UIViewType = UIC3DView
     public typealias Context = UIViewRepresentableContext<C3DView>
@@ -31,7 +40,12 @@ public struct C3DView: UIViewRepresentable, ConfettiThrower {
     }
 }
 
-// For UIKit
+// MARK: - UIKit
+
+/// A UIKit-compatible 3D SceneKit view for rendering and triggering confetti effects.
+///
+/// Subclass of `SCNView` that conforms to `ConfettiThrower`,
+/// allowing programmatic triggering of confetti animations.
 public final class UIC3DView: SCNView, ConfettiThrower {
     private lazy var motionManager = CMMotionManager()
     private lazy var mainParticlesNode = SCNNode()
