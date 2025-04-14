@@ -62,9 +62,8 @@ public final class UIC3DView: SCNView, ConfettiThrower {
         scene.rootNode.addChildNode(mainParticlesNode)
 
         let cameraNode = SCNNode()
-        let camera = SCNCamera()
         scene.rootNode.addChildNode(cameraNode)
-        cameraNode.camera = camera
+        cameraNode.camera = SCNCamera()
         cameraNode.position = SCNVector3(0, 0.1, 3.5)
 
         let turbulenceNode = SCNNode()
@@ -109,6 +108,7 @@ public final class UIC3DView: SCNView, ConfettiThrower {
         for _ in 1...nbVariations {
             for confetto in confetti {
                 let particleSystem = SCNParticleSystem()
+                // Image & color
                 particleSystem.particleImage = confetto.image
                 particleSystem.particleColor = confetto.color ?? .white
                 particleSystem.particleColorVariation = SCNVector4(0, 0, 0, 0)
@@ -120,12 +120,13 @@ public final class UIC3DView: SCNView, ConfettiThrower {
                 particleSystem.spreadingAngle = 40
                 particleSystem.particleAngleVariation = 200
                 particleSystem.particleAngle = 100
+                
                 // Simulation
                 particleSystem.particleLifeSpan = options.lifeSpan
                 particleSystem.particleVelocity = 2 + CGFloat.random(in: 0...0.01)
-
                 particleSystem.particleAngularVelocity = CGFloat(Int.random(in: 100...400))
                 particleSystem.particleAngularVelocityVariation = 100
+                
                 // Image
                 particleSystem.particleSize = 0.05
                 particleSystem.particleSizeVariation = 0.05
@@ -134,6 +135,7 @@ public final class UIC3DView: SCNView, ConfettiThrower {
                 particleSystem.isBlackPassEnabled = true
                 particleSystem.writesToDepthBuffer = true
                 particleSystem.orientationMode = .free
+                
                 // Physics
                 particleSystem.isAffectedByGravity = true
                 particleSystem.isAffectedByPhysicsFields = true
@@ -147,7 +149,6 @@ public final class UIC3DView: SCNView, ConfettiThrower {
                 particleSystem.particleMassVariation = 0.005
 
                 particleSystem.loops = false
-
 
                 let particleSystemNode = SCNNode()
                 particleSystemNode.addParticleSystem(particleSystem)
