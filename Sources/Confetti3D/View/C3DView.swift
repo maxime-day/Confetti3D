@@ -164,76 +164,57 @@ public final class UIC3DView: SCNView, ConfettiThrower {
     }
 
     private func setupGlitter(with options: C3DGlitterOptions) {
-        
-        let nbVariations = 20
+        let glitter = options.confetti
+        let nbVariations = 2
 
-        for index in 1...nbVariations {
-
-            let particleSystem = SCNParticleSystem()
-            particleSystem.particleImage = UIImage(named: "confetti_08", in: .module, with: nil)!
-
-            particleSystem.particleColor = switch index {
-            case 1...4:
-                // Champagne pink – soft, warm highlight
-                UIColor(red: 1.0, green: 0.84, blue: 0.72, alpha: 1.0)
-            case 5...8:
-                // Light copper – warm and vibrant orange tone
-                UIColor(red: 0.95, green: 0.6, blue: 0.3, alpha: 1.0)
-            case 9...12:
-                // Warm bronze – deep, rich brown-gold
-                UIColor(red: 0.6, green: 0.4, blue: 0.2, alpha: 1.0)
-            case 13...16:
-                // Deep rose gold – strong, saturated warm pink
-                UIColor(red: 0.85, green: 0.5, blue: 0.4, alpha: 1.0)
-            case 17...20:
-                // Classic warm gold – balanced and bright
-                UIColor(red: 1.0, green: 0.78, blue: 0.2, alpha: 1.0)
-            default:
-                // Fallback to warm gold
-                UIColor(red: 1.0, green: 0.78, blue: 0.2, alpha: 1.0)
+        for _ in 1...nbVariations {
+            for confetto in glitter {
+                
+                let particleSystem = SCNParticleSystem()
+                particleSystem.particleImage = confetto.image
+                particleSystem.particleColor = confetto.color ?? .white
+                particleSystem.particleColorVariation = SCNVector4(0.01, 0.01, 0, 0)
+                
+                // Emitter
+                particleSystem.birthRate = CGFloat(options.birthRate / nbVariations)
+                particleSystem.emissionDuration = options.emissionDuration
+                particleSystem.birthDirection = .random
+                
+                particleSystem.spreadingAngle = 20
+                particleSystem.particleAngleVariation = 2000
+                particleSystem.particleAngle = 360
+                // Simulation
+                particleSystem.particleLifeSpan = options.lifeSpan
+                particleSystem.particleVelocity = 4
+                particleSystem.particleVelocityVariation = 2
+                
+                particleSystem.particleAngularVelocity = CGFloat(Int.random(in:  500...1000))
+                particleSystem.particleAngularVelocityVariation = 10
+                // Image
+                particleSystem.particleSize = 0.05
+                particleSystem.particleSizeVariation = 0.01
+                
+                // Rendering
+                particleSystem.isBlackPassEnabled = true
+                particleSystem.writesToDepthBuffer = true
+                particleSystem.orientationMode = .free
+                // Physics
+                particleSystem.isAffectedByGravity = true
+                particleSystem.isAffectedByPhysicsFields = true
+                particleSystem.particleDiesOnCollision = false
+                particleSystem.particleFriction = 200
+                particleSystem.dampingFactor = 1.8
+                particleSystem.acceleration = SCNVector3(0, 0.3, 0)
+                
+                particleSystem.loops = false
+                
+                let particleSystemNode = SCNNode()
+                particleSystemNode.position = SCNVector3(0, 0.5, 0)
+                particleSystemNode.addParticleSystem(particleSystem)
+                mainParticlesNode.addChildNode(particleSystemNode)
+                
+                particleSystemNode.runAction(.fadeOut(duration: options.lifeSpan))
             }
-
-            particleSystem.particleColorVariation = SCNVector4(0.01, 0.01, 0, 0)
-
-            // Emitter
-            particleSystem.birthRate = CGFloat(options.birthRate / nbVariations)
-            particleSystem.emissionDuration = options.emissionDuration
-            particleSystem.birthDirection = .random
-
-            particleSystem.spreadingAngle = 20
-            particleSystem.particleAngleVariation = 2000
-            particleSystem.particleAngle = 360
-            // Simulation
-            particleSystem.particleLifeSpan = options.lifeSpan
-            particleSystem.particleVelocity = 4
-            particleSystem.particleVelocityVariation = 2
-
-            particleSystem.particleAngularVelocity = CGFloat(Int.random(in:  500...1000))
-            particleSystem.particleAngularVelocityVariation = 10
-            // Image
-            particleSystem.particleSize = 0.05
-            particleSystem.particleSizeVariation = 0.01
-            
-            // Rendering
-            particleSystem.isBlackPassEnabled = true
-            particleSystem.writesToDepthBuffer = true
-            particleSystem.orientationMode = .free
-            // Physics
-            particleSystem.isAffectedByGravity = true
-            particleSystem.isAffectedByPhysicsFields = true
-            particleSystem.particleDiesOnCollision = false
-            particleSystem.particleFriction = 200
-            particleSystem.dampingFactor = 1.8
-            particleSystem.acceleration = SCNVector3(0, 0.3, 0)
-
-            particleSystem.loops = false
-
-            let particleSystemNode = SCNNode()
-            particleSystemNode.position = SCNVector3(0, 0.5, 0)
-            particleSystemNode.addParticleSystem(particleSystem)
-            mainParticlesNode.addChildNode(particleSystemNode)
-            
-            particleSystemNode.runAction(.fadeOut(duration: options.lifeSpan))
         }
 
         if options.isAffectedByGravity {
