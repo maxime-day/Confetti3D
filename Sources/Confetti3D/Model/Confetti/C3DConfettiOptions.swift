@@ -14,16 +14,20 @@ public struct C3DConfettiOptions: Sendable {
     let emissionDuration: TimeInterval
     let lifeSpan: TimeInterval
     
+    let size: CGFloat
+    
     public init(confetti: [C3DConfetti],
-                isAffectedByGravity: Bool,
-                birthRate: Int,
-                emissionDuration: TimeInterval,
-                lifeSpan: TimeInterval) {
+                isAffectedByGravity: Bool = true,
+                birthRate: Int = 40,
+                emissionDuration: TimeInterval = 3,
+                lifeSpan: TimeInterval = 10,
+                size: CGFloat = 1) {
         self.confetti = confetti
         self.isAffectedByGravity = isAffectedByGravity
         self.birthRate = birthRate
         self.emissionDuration = emissionDuration
         self.lifeSpan = lifeSpan
+        self.size = size
     }
 }
 

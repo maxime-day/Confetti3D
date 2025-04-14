@@ -128,7 +128,7 @@ public final class UIC3DView: SCNView, ConfettiThrower {
                 particleSystem.particleAngularVelocityVariation = 100
                 
                 // Image
-                particleSystem.particleSize = 0.05
+                particleSystem.particleSize = 0.05 * options.size
                 particleSystem.particleSizeVariation = 0.05
                 
                 // Rendering
@@ -191,7 +191,7 @@ public final class UIC3DView: SCNView, ConfettiThrower {
                 particleSystem.particleAngularVelocity = CGFloat(Int.random(in:  500...1000))
                 particleSystem.particleAngularVelocityVariation = 10
                 // Image
-                particleSystem.particleSize = 0.05
+                particleSystem.particleSize = 0.05 * options.size
                 particleSystem.particleSizeVariation = 0.01
                 
                 // Rendering
