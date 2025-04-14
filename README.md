@@ -10,8 +10,10 @@
 - 🛠️ Simple and easy-to-use API  
 - 📡 **Interactive effects**: Confetti adapts to the device's **accelerometer**, reacting to movements for a more immersive experience  
 
-![Confetti GIF](confetti.gif)
-![Glitter GIF](glitter.gif)
+| Confetti | Glitter |
+|----------|----------|
+| ![Confetti GIF](confetti.gif) | ![Glitter GIF](glitter.gif) |
+(looks a bit laggy here but it's smooth on devices)
 
 ## 📦 Installation
 
