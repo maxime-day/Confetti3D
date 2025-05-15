@@ -24,9 +24,11 @@ public struct C3DView: UIViewRepresentable, ConfettiThrower {
     public typealias UIViewType = UIC3DView
     public typealias Context = UIViewRepresentableContext<C3DView>
 
-    private let confettiView = UIC3DView()
-    
-    public init() {}
+    private let confettiView: UIC3DView
+
+    public init(x: Float = 0, y: Float = 0.75, z: Float = 0, radiants: Float = 0) {
+        self.confettiView = UIC3DView(x: x, y: y, z: z, radiants: radiants)
+    }
 
     public func updateUIView(_ uiView: UIViewType, context: Context) {
     }
@@ -50,9 +52,14 @@ public final class UIC3DView: SCNView, ConfettiThrower {
     private lazy var motionManager = CMMotionManager()
     private lazy var mainParticlesNode = SCNNode()
 
-    public init() {
+/// Initializes the 3D confetti view with a custom emitter position.
+/// - Parameters:
+///   - x: Horizontal position of the emitter (left/right).
+///   - y: Vertical position of the emitter (up/down).
+///   - z: Depth position of the emitter (closer/farther from the camera).
+    public init(x: Float = 0, y: Float = 0.75, z: Float = 0, radiants: Float = 0) {
         super.init(frame: .zero)
-        setup()
+        setup(x: x, y: y, z: z, radiants: radiants)
     }
 
     public override init(frame: CGRect, options: [String: Any]? = nil) {
@@ -65,14 +72,15 @@ public final class UIC3DView: SCNView, ConfettiThrower {
         setup()
     }
 
-    private func setup() {
+    private func setup(x: Float = 0, y: Float = 0.75, z: Float = 0, radiants: Float = 0) {
         let scene = SCNScene()
         scene.background.contents = UIColor.clear
         scene.physicsWorld.gravity = SCNVector3(x: 0, y: -1, z: 0)
         scene.physicsWorld.speed = 6
         self.scene = scene
 
-        mainParticlesNode.position = SCNVector3(0, 0.75, 0)
+        mainParticlesNode.position = SCNVector3(x: x, y: y, z: z)
+        mainParticlesNode.eulerAngles = SCNVector3(0, 0, radiants)
         scene.rootNode.addChildNode(mainParticlesNode)
 
         let cameraNode = SCNNode()
