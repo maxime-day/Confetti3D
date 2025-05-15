@@ -26,6 +26,12 @@ public struct C3DView: UIViewRepresentable, ConfettiThrower {
 
     private let confettiView: UIC3DView
 
+/// Initializes the 3D confetti view with a custom emitter position and rotation.
+/// - Parameters:
+///   - x: Horizontal position of the emitter (left/right).
+///   - y: Vertical position of the emitter (up/down).
+///   - z: Depth position of the emitter (closer/farther from the camera).
+///   - radians: Rotation around the Z axis in radians (e.g., to tilt the emitter).
     public init(x: Float = 0, y: Float = 0.75, z: Float = 0, radians: Float = 0) {
         self.confettiView = UIC3DView(x: x, y: y, z: z, radians: radians)
     }
@@ -52,11 +58,12 @@ public final class UIC3DView: SCNView, ConfettiThrower {
     private lazy var motionManager = CMMotionManager()
     private lazy var mainParticlesNode = SCNNode()
 
-/// Initializes the 3D confetti view with a custom emitter position.
+/// Initializes the 3D confetti view with a custom emitter position and rotation.
 /// - Parameters:
 ///   - x: Horizontal position of the emitter (left/right).
 ///   - y: Vertical position of the emitter (up/down).
 ///   - z: Depth position of the emitter (closer/farther from the camera).
+///   - radians: Rotation around the Z axis in radians (e.g., to tilt the emitter).
     public init(x: Float = 0, y: Float = 0.75, z: Float = 0, radians: Float = 0) {
         super.init(frame: .zero)
         setup(x: x, y: y, z: z, radians: radians)
