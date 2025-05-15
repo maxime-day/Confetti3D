@@ -26,8 +26,8 @@ public struct C3DView: UIViewRepresentable, ConfettiThrower {
 
     private let confettiView: UIC3DView
 
-    public init(x: Float = 0, y: Float = 0.75, z: Float = 0, radiants: Float = 0) {
-        self.confettiView = UIC3DView(x: x, y: y, z: z, radiants: radiants)
+    public init(x: Float = 0, y: Float = 0.75, z: Float = 0, radians: Float = 0) {
+        self.confettiView = UIC3DView(x: x, y: y, z: z, radians: radians)
     }
 
     public func updateUIView(_ uiView: UIViewType, context: Context) {
@@ -57,9 +57,9 @@ public final class UIC3DView: SCNView, ConfettiThrower {
 ///   - x: Horizontal position of the emitter (left/right).
 ///   - y: Vertical position of the emitter (up/down).
 ///   - z: Depth position of the emitter (closer/farther from the camera).
-    public init(x: Float = 0, y: Float = 0.75, z: Float = 0, radiants: Float = 0) {
+    public init(x: Float = 0, y: Float = 0.75, z: Float = 0, radians: Float = 0) {
         super.init(frame: .zero)
-        setup(x: x, y: y, z: z, radiants: radiants)
+        setup(x: x, y: y, z: z, radians: radians)
     }
 
     public override init(frame: CGRect, options: [String: Any]? = nil) {
@@ -72,7 +72,7 @@ public final class UIC3DView: SCNView, ConfettiThrower {
         setup()
     }
 
-    private func setup(x: Float = 0, y: Float = 0.75, z: Float = 0, radiants: Float = 0) {
+    private func setup(x: Float = 0, y: Float = 0.75, z: Float = 0, radians: Float = 0) {
         let scene = SCNScene()
         scene.background.contents = UIColor.clear
         scene.physicsWorld.gravity = SCNVector3(x: 0, y: -1, z: 0)
@@ -80,7 +80,7 @@ public final class UIC3DView: SCNView, ConfettiThrower {
         self.scene = scene
 
         mainParticlesNode.position = SCNVector3(x: x, y: y, z: z)
-        mainParticlesNode.eulerAngles = SCNVector3(0, 0, radiants)
+        mainParticlesNode.eulerAngles = SCNVector3(0, 0, radians)
         scene.rootNode.addChildNode(mainParticlesNode)
 
         let cameraNode = SCNNode()
