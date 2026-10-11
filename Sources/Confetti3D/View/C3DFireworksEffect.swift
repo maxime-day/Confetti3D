@@ -22,7 +22,7 @@ enum C3DFireworksEffect {
 
         for index in 0..<options.count {
             let color = options.colors[index % options.colors.count]
-            let duration = options.flightDuration * Double.random(in: 0.88...1.12) / Double(options.playbackSpeed)
+            let duration = options.flightDuration * Double.random(in: 0.88...1.12) / Double(options.animationSpeed)
             let start = SCNVector3(
                 options.position.x + Float.random(in: -options.horizontalSpread...options.horizontalSpread),
                 options.position.y,
@@ -34,7 +34,7 @@ enum C3DFireworksEffect {
                 start.z + Float.random(in: -0.15...0.15)
             )
             let bend = Float.random(in: -0.12...0.12)
-            let rocket = rocketNode(texture: texture, size: options.size, playbackSpeed: options.playbackSpeed)
+            let rocket = rocketNode(texture: texture, size: options.size, playbackSpeed: options.animationSpeed)
             rocket.position = start
             let explosion = makeBurst(color: color, options: options)
             explosion.position = end
@@ -53,18 +53,18 @@ enum C3DFireworksEffect {
                         node.parent?.addChildNode(explosion)
                     },
                     // Keep the emitter alive until its already-emitted trail has faded.
-                    .wait(duration: rocketTrailCleanupDuration / Double(options.playbackSpeed)),
+                    .wait(duration: rocketTrailCleanupDuration / Double(options.animationSpeed)),
                     .removeFromParentNode()
                 ]))
             }
             salvo.runAction(.sequence([
-                .wait(duration: Double(index) * options.launchInterval / Double(options.playbackSpeed)), launch
+                .wait(duration: Double(index) * options.launchInterval / Double(options.animationSpeed)), launch
             ]))
         }
 
         let totalDuration = (Double(options.count - 1) * options.launchInterval
             + options.flightDuration * 1.12 + max(rocketTrailCleanupDuration, options.lifeSpan * 1.2 + starTrailCleanupDuration + 0.05) + 0.2)
-            / Double(options.playbackSpeed)
+            / Double(options.animationSpeed)
         salvo.runAction(.sequence([.wait(duration: totalDuration), .removeFromParentNode()]))
         return salvo
     }
@@ -114,12 +114,12 @@ enum C3DFireworksEffect {
         // Rotate shared spherical velocity data so overlapping bursts stay varied.
         burst.eulerAngles.y = Float.random(in: 0...(2 * .pi))
         let material = geometry.firstMaterial!
-        let duration = (options.lifeSpan * 1.2 + starTrailCleanupDuration + 0.05) / Double(options.playbackSpeed)
+        let duration = (options.lifeSpan * 1.2 + starTrailCleanupDuration + 0.05) / Double(options.animationSpeed)
         burst.runAction(.sequence([
             // One scalar update per explosion; no per-star nodes, constraints,
             // native emitters, buffer uploads, or CPU trajectory loop per frame.
             .customAction(duration: duration) { _, elapsed in
-                material.setValue(Float(elapsed * options.playbackSpeed), forKey: "c3d_elapsed")
+                material.setValue(Float(elapsed * options.animationSpeed), forKey: "c3d_elapsed")
             },
             .removeFromParentNode()
         ]))

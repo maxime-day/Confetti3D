@@ -58,6 +58,29 @@ final class FireworksRenderingTests: XCTestCase {
     }
 
     @MainActor
+    func testNormalizedPlaybackSpeedPreservesDefaultPaceAndScalesAnimation() throws {
+        XCTAssertEqual(C3DFireworksOptions.defaultOptions.playbackSpeed, 1)
+        let renderer = SCNRenderer(device: try XCTUnwrap(MTLCreateSystemDefaultDevice()))
+        let scene = cameraScene()
+        let normal = C3DFireworksEffect.makeBurst(color: .systemCyan, options: .defaultOptions)
+        let slow = C3DFireworksEffect.makeBurst(color: .systemCyan,
+                                               options: C3DFireworksOptions(playbackSpeed: 0.5))
+        scene.rootNode.addChildNode(normal)
+        scene.rootNode.addChildNode(slow)
+        renderer.scene = scene
+        renderer.isPlaying = true
+        renderer.pointOfView = scene.rootNode.childNodes.first
+        for frame in 0...30 {
+            _ = renderer.snapshot(atTime: Double(frame) / 30, with: CGSize(width: 32, height: 32),
+                                  antialiasingMode: .none)
+        }
+        let normalTime = try XCTUnwrap(normal.geometry?.firstMaterial?.value(forKey: "c3d_elapsed") as? NSNumber)
+        let slowTime = try XCTUnwrap(slow.geometry?.firstMaterial?.value(forKey: "c3d_elapsed") as? NSNumber)
+        XCTAssertEqual(normalTime.doubleValue, 0.7, accuracy: 0.03, "Speed 1 must retain the previously tuned pace")
+        XCTAssertEqual(slowTime.doubleValue, normalTime.doubleValue * 0.5, accuracy: 0.01)
+    }
+
+    @MainActor
     func testExplosionRenderingProducesVisibleColoredTrails() throws {
         let renderer = SCNRenderer(device: try XCTUnwrap(MTLCreateSystemDefaultDevice()))
         renderer.scene = sixExplosions()

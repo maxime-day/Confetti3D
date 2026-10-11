@@ -12,12 +12,12 @@ public struct C3DFireworksOptions: Sendable {
         .systemPurple
     ]
 
-    /// Global effect speed. 1 is normal speed; 0.7 plays all phases more slowly.
+    /// Global effect speed relative to the tuned default. 1 preserves the default pace; 0.5 is half speed.
     public let playbackSpeed: CGFloat
     public let count: Int
     /// Each rocket cycles through this palette. An empty palette uses the default colors.
     public let colors: [UIColor]
-    /// Delay between rockets at speed 1, in seconds.
+    /// Delay between rockets on the animation timeline, scaled by the global effect speed.
     public let launchInterval: TimeInterval
     /// Multiplier for the size of the luminous heads and their trails.
     public let size: CGFloat
@@ -26,6 +26,8 @@ public struct C3DFireworksOptions: Sendable {
 
     // Tuned together to preserve the appearance and the bounded GPU workload.
     // These implementation details are not part of the public configuration.
+    var animationSpeed: CGFloat { playbackSpeed * 0.7 }
+
     let flightDuration: TimeInterval
     let particleCount: Int
     let lifeSpan: TimeInterval
@@ -34,7 +36,7 @@ public struct C3DFireworksOptions: Sendable {
 
     public init(
         count: Int = 3,
-        playbackSpeed: CGFloat = 0.7,
+        playbackSpeed: CGFloat = 1,
         colors: [UIColor] = C3DFireworksOptions.defaultColors,
         launchInterval: TimeInterval = 0.45,
         size: CGFloat = 1,
@@ -47,7 +49,7 @@ public struct C3DFireworksOptions: Sendable {
     /// Internal tuning entry point used by rendering tests with smaller fixtures.
     init(
         count: Int = 3,
-        playbackSpeed: CGFloat = 0.7,
+        playbackSpeed: CGFloat = 1,
         colors: [UIColor] = C3DFireworksOptions.defaultColors,
         launchInterval: TimeInterval = 0.45,
         flightDuration: TimeInterval = 1.75,

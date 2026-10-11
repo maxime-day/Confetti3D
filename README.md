@@ -110,8 +110,8 @@ The defaults provide a complete three-rocket salvo. Only six settings are expose
 | --- | --- | --- |
 | `count` | `3` | Number of rockets in one salvo. |
 | `colors` | Cyan, ember red, warm gold, green, purple | Rockets cycle through the palette. An empty palette uses the defaults. |
-| `launchInterval` | `0.45` seconds | Delay between rockets at speed 1. Use `0` for simultaneous launches. |
-| `playbackSpeed` | `0.7` | Speed of the entire effect. `1` is normal speed; `0.5` is half speed. |
+| `launchInterval` | `0.45` seconds | Delay on the animation timeline (about `0.64` real seconds by default). Use `0` for simultaneous launches. |
+| `playbackSpeed` | `1` | Speed of the entire effect. `1` is normal speed; `0.5` is half speed. |
 | `size` | `1` | Size multiplier for luminous heads and trails. |
 | `position` | `(0, -1.2, 0)` | Center of the launch area in SceneKit scene units. |
 
@@ -155,23 +155,5 @@ effects.throwConfetti(type: .confetti(C3DConfettiOptions(
 ```
 
 `C3DGlitterOptions` accepts the same settings. `isAffectedByGravity` enables device-motion updates; both effects also have their own built-in downward acceleration. Images are multiplied by their tint color: use white shapes on a transparent background when you want the specified colors to show accurately.
-
-## Migrating from 1.x
-
-Existing confetti and glitter calls continue to work. Version 2 adds `.fireworks` to `C3DConfettiType`; update exhaustive switches to handle the new case:
-
-```swift
-switch type {
-case .confetti(let options):
-    // Handle confetti.
-    break
-case .glitter(let options):
-    // Handle glitter.
-    break
-case .fireworks(let options):
-    // Handle fireworks.
-    break
-}
-```
 
 See [CHANGELOG.md](CHANGELOG.md) for the release notes.

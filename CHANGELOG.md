@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.0 — Unreleased
+## 2.0.0 — 2026-10-11
 
 ### Added
 
@@ -15,8 +15,4 @@
 
 - Firework explosions use one GPU geometry batch each, shared mesh buffers, and one elapsed-time update per burst.
 - Completed firework salvos and confetti/glitter emitter nodes are removed from the scene.
-- README with SwiftUI and UIKit examples, fireworks configuration, and migration instructions.
-
-### Migration
-
-`C3DConfettiType` has a new `.fireworks` case. Applications with exhaustive switches over this enum must add a matching case. Existing confetti and glitter calls are unchanged. iOS 15 remains the minimum supported version.
+- README with SwiftUI and UIKit examples, fireworks configuration, and refreshed demos.
