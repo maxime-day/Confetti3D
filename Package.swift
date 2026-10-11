@@ -18,9 +18,5 @@ let package = Package(
                 .process("Resources")
             ]
         ),
-        .testTarget(
-            name: "Confetti3DTests",
-            dependencies: ["Confetti3D"]
-        ),
     ]
 )

@@ -46,7 +46,7 @@ public struct C3DFireworksOptions: Sendable {
                   launchInterval: launchInterval, particleCount: 140, size: size, position: position)
     }
 
-    /// Internal tuning entry point used by rendering tests with smaller fixtures.
+    /// Internal tuning entry point.
     init(
         count: Int = 3,
         playbackSpeed: CGFloat = 1,

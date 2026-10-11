@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Remove the test target and test sources from the package.
+
 ## 2.0.0 — 2026-10-11
 
 ### Added
@@ -8,7 +12,6 @@
 - Rising rockets with golden spark trails, a visible slowdown before detonation, and randomized launch trajectories.
 - Multicolored explosions with continuous curved filaments, incandescent cores, subtle glow, air resistance, gravity, and gradual fading.
 - Six optional fireworks settings: `count`, `colors`, `launchInterval`, `playbackSpeed`, `size`, and `position`.
-- Rendering, trajectory, cleanup, and performance tests, including six simultaneous explosions.
 - New animated previews and 60 fps videos for fireworks, confetti, and glitter.
 
 ### Improved
