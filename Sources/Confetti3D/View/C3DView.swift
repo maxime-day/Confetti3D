@@ -10,7 +10,7 @@ import Combine
 public protocol ConfettiThrower {
     /// Triggers the confetti animation using the specified type.
     ///
-    /// - Parameter type: The type of confetti effect to throw (e.g., `.confetti`, `.glitter`).
+    /// - Parameter type: The effect to throw (`.confetti`, `.glitter`, or `.fireworks`).
     func throwConfetti(type: C3DConfettiType)
 }
 
@@ -49,6 +49,7 @@ public struct C3DView: UIViewRepresentable, ConfettiThrower {
 public final class UIC3DView: SCNView, ConfettiThrower {
     private lazy var motionManager = CMMotionManager()
     private lazy var mainParticlesNode = SCNNode()
+    private var hasPreparedFireworks = false
 
     public init() {
         super.init(frame: .zero)
@@ -104,13 +105,20 @@ public final class UIC3DView: SCNView, ConfettiThrower {
     }
 
     public func throwConfetti(type: C3DConfettiType = .default) {
-        print("Throwing confetti")
-        
         switch type {
         case .confetti(let options):
             setupConfetti(with: options)
         case .glitter(let options):
             setupGlitter(with: options)
+        case .fireworks(let options):
+            guard options.count > 0 else { return }
+            if !hasPreparedFireworks {
+                hasPreparedFireworks = true
+                // Prepare the shared pipeline/textures during the first ascent,
+                // before its first explosion needs them on screen.
+                prepare([C3DFireworksEffect.preparationGeometry()], completionHandler: nil)
+            }
+            mainParticlesNode.addChildNode(C3DFireworksEffect.makeNode(options: options))
         }
     }
 
@@ -168,7 +176,11 @@ public final class UIC3DView: SCNView, ConfettiThrower {
                 particleSystemNode.addParticleSystem(particleSystem)
                 mainParticlesNode.addChildNode(particleSystemNode)
                 
-                particleSystemNode.runAction(.fadeOut(duration: options.lifeSpan))
+                particleSystemNode.runAction(.sequence([
+                    .fadeOut(duration: options.lifeSpan),
+                    .wait(duration: options.emissionDuration),
+                    .removeFromParentNode()
+                ]))
             }
         }
 
@@ -228,7 +240,11 @@ public final class UIC3DView: SCNView, ConfettiThrower {
                 particleSystemNode.addParticleSystem(particleSystem)
                 mainParticlesNode.addChildNode(particleSystemNode)
                 
-                particleSystemNode.runAction(.fadeOut(duration: options.lifeSpan))
+                particleSystemNode.runAction(.sequence([
+                    .fadeOut(duration: options.lifeSpan),
+                    .wait(duration: options.emissionDuration),
+                    .removeFromParentNode()
+                ]))
             }
         }
 

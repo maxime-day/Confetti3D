@@ -1,0 +1,7 @@
+# Local confetti demo app
+/TestApp/
+
+# Swift Package Manager and local Xcode state
+/.build/
+/.swiftpm/
+.DS_Store
