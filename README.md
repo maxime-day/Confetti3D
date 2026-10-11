@@ -6,7 +6,7 @@ A lightweight Swift package powered by SceneKit, with customizable effects and n
 - 🎆 Fireworks with rising rockets, golden sparks, curved luminous trails, and fading explosions.
 - 🎨 Confetti with custom images, colors, and emission settings.
 - ✨ Glitter in warm metallic tones.
-- 📱 Confetti and glitter can react to the device's accelerometer.
+- 📡 **Interactive effects**: Confetti and glitter react to the device's **accelerometer**, responding to device movements.
 - ⚡ Firework explosions animate on the GPU with shared geometry and one draw batch per explosion.
 
 <p align="center">
