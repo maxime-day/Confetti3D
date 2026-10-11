@@ -102,7 +102,7 @@ final class CelebrationViewController: UIViewController {
 
 ## Fireworks
 
-Each rocket rises along a slightly randomized path, slows before detonation, and explodes into a colorful spherical burst. Embers leave continuous curved filaments, slow under air resistance, gently fall, and fade. White-hot cores and a subtle colored glow are drawn inside the same geometry.
+Each rocket rises along a slightly randomized path, slows before detonation, and explodes into spherical burst.
 
 The defaults provide a complete three-rocket salvo. Only six settings are exposed:
 
