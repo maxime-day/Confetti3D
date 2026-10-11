@@ -14,13 +14,13 @@ A lightweight Swift package powered by SceneKit, with customizable effects and n
 </p>
 
 <p align="center">
-  <a href="https://github.com/maxime-day/confetti3Dgifs/blob/main/fireworks.mp4">Watch fireworks in high quality at 60 fps</a>
+  <a href="https://github.com/maxime-day/confetti3Dgifs/raw/refs/heads/main/fireworks.mp4">Download the high-quality 60 fps fireworks video</a>
 </p>
 
 | Confetti | Glitter |
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/maxime-day/confetti3Dgifs/main/confetti.gif" width="300" alt="Colorful 3D confetti" /> | <img src="https://raw.githubusercontent.com/maxime-day/confetti3Dgifs/main/glitter.gif" width="300" alt="Warm metallic glitter" /> |
-| [60 fps video](https://github.com/maxime-day/confetti3Dgifs/blob/main/confetti.mp4) | [60 fps video](https://github.com/maxime-day/confetti3Dgifs/blob/main/glitter.mp4) |
+| [Download 60 fps video](https://github.com/maxime-day/confetti3Dgifs/raw/refs/heads/main/confetti.mp4) | [Download 60 fps video](https://github.com/maxime-day/confetti3Dgifs/raw/refs/heads/main/glitter.mp4) |
 
 GIFs provide lightweight animated previews. The linked videos preserve the full frame rate and finer color gradients.
 
