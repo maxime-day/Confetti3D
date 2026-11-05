@@ -163,11 +163,11 @@ effects.throwConfetti(type: .confetti(C3DConfettiOptions(
 )))
 ```
 
-To mix the default shapes with your own images, start from `C3DConfetti.defaultConfetti(colors:)`. A `nil` color keeps the image's original colors:
+To mix the default shapes with your own images, start from `C3DConfetti.defaultConfetti(colors:)`. A `nil` color keeps the image's original colors, and `size` makes one element bigger or smaller than the others:
 
 ```swift
 let particles = C3DConfetti.defaultConfetti(colors: [.systemPurple, .systemPink])
-    + [C3DConfetti(image: avatar, color: nil)]
+    + [C3DConfetti(image: avatar, color: nil, size: 2.5)]
 
 effects.throwConfetti(type: .confetti(C3DConfettiOptions(confetti: particles)))
 ```
