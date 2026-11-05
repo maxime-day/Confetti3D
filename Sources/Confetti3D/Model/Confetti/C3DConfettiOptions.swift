@@ -100,6 +100,31 @@ extension C3DConfettiOptions {
     /// Includes 8 colorful confetti images with associated tint colors,
     /// default emission values, and gravity enabled.
     public static let defaultOptions = C3DConfettiOptions(confetti: Constants.defaultConfetti)
+
+    /// The same options, emitting from another position.
+    func with(position: SCNVector3) -> C3DConfettiOptions {
+        C3DConfettiOptions(confetti: confetti,
+                           isAffectedByGravity: isAffectedByGravity,
+                           birthRate: birthRate,
+                           emissionDuration: emissionDuration,
+                           lifeSpan: lifeSpan,
+                           size: size,
+                           position: position,
+                           emittingDirection: emittingDirection)
+    }
+}
+
+extension C3DConfetti {
+    /// The 8 default confetti shapes, tinted with your colors.
+    ///
+    /// Colors are paired with the images in order, and the images repeat when there are more colors.
+    /// An empty array keeps the default colors. Combine the result with your own `C3DConfetti`,
+    /// for example a picture with a `nil` color to keep its original colors.
+    ///
+    /// - Parameter colors: The tint colors applied to the default confetti images.
+    public static func defaultConfetti(colors: [UIColor] = []) -> [C3DConfetti] {
+        Constants.confetti(colors: colors)
+    }
 }
 
 fileprivate enum Constants {

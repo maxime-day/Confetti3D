@@ -69,6 +69,18 @@ extension C3DGlitterOptions {
     /// This configuration is ideal for celebratory or elegant effects,
     /// using the same image tinted with variations like gold, copper, and rose.
     public static let defaultOptions = C3DGlitterOptions(confetti: Constants.defaultGlitter)
+
+    /// The same options, emitting from another position.
+    func with(position: SCNVector3) -> C3DGlitterOptions {
+        C3DGlitterOptions(confetti: confetti,
+                          isAffectedByGravity: isAffectedByGravity,
+                          birthRate: birthRate,
+                          emissionDuration: emissionDuration,
+                          lifeSpan: lifeSpan,
+                          size: size,
+                          position: position,
+                          emittingDirection: emittingDirection)
+    }
 }
 
 fileprivate enum Constants {

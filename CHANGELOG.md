@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- `throwConfetti(type:from:)` on `UIC3DView` and `C3DView` starts confetti, glitter, or fireworks from a point of the view, in UIKit coordinates.
+- `C3DConfetti.defaultConfetti(colors:)` returns the 8 default confetti shapes with your own palette, ready to mix with your own images.
+
 ## 2.0.2 — 2026-11-05
 
 ### Fixed

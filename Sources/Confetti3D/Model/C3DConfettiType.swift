@@ -5,6 +5,8 @@
 //  Created by Maxime Daymard on 26/10/2024.
 //
 
+import SceneKit
+
 /// Defines the type of confetti effect to be rendered.
 ///
 /// - `confetti`: A classic confetti effect using a variety of shapes and colors.
@@ -27,4 +29,16 @@ extension C3DConfettiType {
     /// Defaults to `.confetti` with `C3DConfettiOptions.defaultOptions`.
     /// This provides a colorful and playful visual effect.
     public static let `default`: C3DConfettiType = .confetti(.defaultOptions)
+
+    /// The same effect, starting from another position in the scene.
+    func positioned(at position: SCNVector3) -> C3DConfettiType {
+        switch self {
+        case .confetti(let options):
+            return .confetti(options.with(position: position))
+        case .glitter(let options):
+            return .glitter(options.with(position: position))
+        case .fireworks(let options):
+            return .fireworks(options.with(position: position))
+        }
+    }
 }

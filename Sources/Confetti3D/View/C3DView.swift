@@ -38,6 +38,15 @@ public struct C3DView: UIViewRepresentable, ConfettiThrower {
     public func throwConfetti(type: C3DConfettiType = .default) {
         confettiView.throwConfetti(type: type)
     }
+
+    /// Triggers an effect that starts from a point of the view.
+    ///
+    /// - Parameters:
+    ///   - type: The effect to throw (`.confetti`, `.glitter`, or `.fireworks`).
+    ///   - point: The starting point, in the view's coordinate space. It replaces the `position` of the options.
+    public func throwConfetti(type: C3DConfettiType = .default, from point: CGPoint) {
+        confettiView.throwConfetti(type: type, from: point)
+    }
 }
 
 // MARK: - UIKit
@@ -121,6 +130,33 @@ public final class UIC3DView: SCNView, ConfettiThrower {
             }
             mainParticlesNode.addChildNode(C3DFireworksEffect.makeNode(options: options))
         }
+    }
+
+    /// Triggers an effect that starts from a point of the view.
+    ///
+    /// The view must be laid out, so that the point can be placed in the scene.
+    ///
+    /// - Parameters:
+    ///   - type: The effect to throw (`.confetti`, `.glitter`, or `.fireworks`).
+    ///   - point: The starting point, in this view's coordinate space. It replaces the `position` of the options.
+    public func throwConfetti(type: C3DConfettiType = .default, from point: CGPoint) {
+        throwConfetti(type: type.positioned(at: scenePosition(of: point)))
+    }
+
+    /// Places a point of the view on the scene plane where effects start (z = 0), as seen by the camera.
+    private func scenePosition(of point: CGPoint) -> SCNVector3 {
+        guard let cameraNode = pointOfView, let camera = cameraNode.camera,
+              bounds.width > 0, bounds.height > 0 else {
+            return SCNVector3Zero
+        }
+        let cameraPosition = cameraNode.worldPosition
+        let aspectRatio = Float(bounds.width / bounds.height)
+        let halfExtent = tan(Float(camera.fieldOfView) * .pi / 360) * cameraPosition.z
+        let halfHeight = camera.projectionDirection == .vertical ? halfExtent : halfExtent / aspectRatio
+        let halfWidth = halfHeight * aspectRatio
+        return SCNVector3(cameraPosition.x + (Float(point.x / bounds.width) * 2 - 1) * halfWidth,
+                          cameraPosition.y + (1 - Float(point.y / bounds.height) * 2) * halfHeight,
+                          0)
     }
 
     private func setupConfetti(with options: C3DConfettiOptions) {

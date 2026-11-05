@@ -74,4 +74,19 @@ public struct C3DFireworksOptions: Sendable {
     }
 
     public static let defaultOptions = C3DFireworksOptions()
+
+    /// The same options, launching from another position.
+    func with(position: SCNVector3) -> C3DFireworksOptions {
+        C3DFireworksOptions(count: count,
+                            playbackSpeed: playbackSpeed,
+                            colors: colors,
+                            launchInterval: launchInterval,
+                            flightDuration: flightDuration,
+                            particleCount: particleCount,
+                            lifeSpan: lifeSpan,
+                            size: size,
+                            position: position,
+                            launchHeight: launchHeight,
+                            horizontalSpread: horizontalSpread)
+    }
 }

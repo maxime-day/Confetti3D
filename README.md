@@ -163,6 +163,23 @@ effects.throwConfetti(type: .confetti(C3DConfettiOptions(
 )))
 ```
 
+To mix the default shapes with your own images, start from `C3DConfetti.defaultConfetti(colors:)`. A `nil` color keeps the image's original colors:
+
+```swift
+let particles = C3DConfetti.defaultConfetti(colors: [.systemPurple, .systemPink])
+    + [C3DConfetti(image: avatar, color: nil)]
+
+effects.throwConfetti(type: .confetti(C3DConfettiOptions(confetti: particles)))
+```
+
+To start an effect from a point of the view, such as a button, pass that point in the view's coordinate space. It replaces the `position` of the options:
+
+```swift
+effects.throwConfetti(type: .confetti(.defaultOptions), from: CGPoint(x: 200, y: 700))
+```
+
+The view must be laid out first, so that the point can be placed in the scene.
+
 `C3DGlitterOptions` accepts the same settings as `C3DConfettiOptions(confetti:)`. `isAffectedByGravity` enables device-motion updates; both effects also have their own built-in downward acceleration. Images are multiplied by their tint color: use white shapes on a transparent background when you want the specified colors to show accurately.
 
 See [CHANGELOG.md](CHANGELOG.md) for the release notes.
