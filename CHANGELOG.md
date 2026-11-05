@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.2 — 2026-11-05
+
+### Fixed
+
+- `UIC3DView` sets its camera as `pointOfView` at initialization, so `projectPoint` and `unprojectPoint` return scene coordinates before the first frame is rendered.
+
 ## 2.0.1 — 2026-11-05
 
 ### Added

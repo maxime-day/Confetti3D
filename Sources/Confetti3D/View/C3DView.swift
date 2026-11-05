@@ -80,6 +80,7 @@ public final class UIC3DView: SCNView, ConfettiThrower {
         scene.rootNode.addChildNode(cameraNode)
         cameraNode.camera = SCNCamera()
         cameraNode.position = SCNVector3(0, 0.1, 3.5)
+        pointOfView = cameraNode
 
         let turbulenceNode = SCNNode()
         let turbulenceField = SCNPhysicsField.turbulenceField(smoothness: 0, animationSpeed: 0)
