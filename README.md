@@ -31,7 +31,7 @@ Requires **iOS 15+** and **Swift 5.7+**.
 In Xcode, add `https://github.com/maxime-day/Confetti3D.git` as a package dependency, or add it to `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/maxime-day/Confetti3D.git", from: "2.0.0")
+.package(url: "https://github.com/maxime-day/Confetti3D.git", from: "2.1.0")
 ```
 
 ## SwiftUI
@@ -150,9 +150,15 @@ effects.throwConfetti(type: .confetti(C3DConfettiOptions(
     lifeSpan: 10,
     size: 1,
     position: SCNVector3(0, 0, 0),
-    emittingDirection: SCNVector3(0, 1, 0)
+    emittingDirection: SCNVector3(0, 1, 0),
+    velocity: 3,
+    velocityVariation: 0,
+    spreadingAngle: 40,
+    damping: 1
 )))
 ```
+
+For a short burst rather than a stream, emit for a fraction of a second and vary the speed: `emissionDuration: 0.15, velocity: 5, velocityVariation: 2.5, damping: 2`. `velocityVariation` spreads the speeds on both sides of `velocity`, `spreadingAngle` opens the emission cone in degrees, and `damping` slows the particles down in the air.
 
 To keep the default confetti shapes with your own palette, pass colors only. They are paired with the 8 default images in order:
 

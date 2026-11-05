@@ -1,12 +1,13 @@
 # Changelog
 
-## Unreleased
+## 2.1.0 — 2026-11-05
 
 ### Added
 
 - `throwConfetti(type:from:)` on `UIC3DView` and `C3DView` starts confetti, glitter, or fireworks from a point of the view, in UIKit coordinates.
 - `C3DConfetti.defaultConfetti(colors:)` returns the 8 default confetti shapes with your own palette, ready to mix with your own images.
 - `C3DConfetti(image:color:size:)` gives one element its own size multiplier, on top of the size of the options.
+- `C3DConfettiOptions` takes `velocity`, `velocityVariation`, `spreadingAngle`, and `damping`, to shape the launch. Their defaults keep the previous behavior.
 
 ### Fixed
 
@@ -17,7 +18,7 @@
 
 ### Fixed
 
-- `UIC3DView` sets its camera as `pointOfView` at initialization, so `projectPoint` and `unprojectPoint` return scene coordinates before the first frame is rendered.
+- `UIC3DView` sets its camera as `pointOfView` at initialization, instead of waiting for the first rendered frame.
 
 ## 2.0.1 — 2026-11-05
 

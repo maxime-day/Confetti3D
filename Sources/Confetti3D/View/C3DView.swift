@@ -177,12 +177,13 @@ public final class UIC3DView: SCNView, ConfettiThrower {
                 particleSystem.birthRate = CGFloat(options.birthRate / nbVariations)
                 particleSystem.emissionDuration = options.emissionDuration
                 particleSystem.emittingDirection = options.emittingDirection
-                particleSystem.spreadingAngle = 40
+                particleSystem.spreadingAngle = options.spreadingAngle
                 particleSystem.particleAngleVariation = 360
                 
                 // Simulation
                 particleSystem.particleLifeSpan = options.lifeSpan
-                particleSystem.particleVelocity = 3 + CGFloat.random(in: 0...0.01)
+                particleSystem.particleVelocity = options.velocity + CGFloat.random(in: 0...0.01)
+                particleSystem.particleVelocityVariation = options.velocityVariation
                 particleSystem.particleAngularVelocity = CGFloat(Int.random(in: 100...400))
                 particleSystem.particleAngularVelocityVariation = 100
                 
@@ -203,7 +204,7 @@ public final class UIC3DView: SCNView, ConfettiThrower {
                 particleSystem.particleDiesOnCollision = false
                 particleSystem.particleFriction = 100
 
-                particleSystem.dampingFactor = 1
+                particleSystem.dampingFactor = options.damping
                 particleSystem.acceleration = SCNVector3(0, -0.5, 0)
 
                 particleSystem.particleMass = 1.5

@@ -34,6 +34,18 @@ public struct C3DConfettiOptions: Sendable {
     /// The direction of the emitter
     let emittingDirection: SCNVector3
 
+    /// The initial speed of the particles.
+    let velocity: CGFloat
+
+    /// The random variation of the initial speed, in both directions.
+    let velocityVariation: CGFloat
+
+    /// The opening angle of the emission cone, in degrees.
+    let spreadingAngle: CGFloat
+
+    /// How fast the particles slow down in the air.
+    let damping: CGFloat
+
     /// Initializes a new set of options for the confetti emitter.
     ///
     /// - Parameters:
@@ -50,7 +62,11 @@ public struct C3DConfettiOptions: Sendable {
                 lifeSpan: TimeInterval = 10,
                 size: CGFloat = 1,
                 position: SCNVector3 = SCNVector3(0, 0, 0),
-                emittingDirection: SCNVector3 = SCNVector3(0, 1, 0)) {
+                emittingDirection: SCNVector3 = SCNVector3(0, 1, 0),
+                velocity: CGFloat = 3,
+                velocityVariation: CGFloat = 0,
+                spreadingAngle: CGFloat = 40,
+                damping: CGFloat = 1) {
         self.confetti = confetti
         self.isAffectedByGravity = isAffectedByGravity
         self.birthRate = birthRate
@@ -59,6 +75,10 @@ public struct C3DConfettiOptions: Sendable {
         self.size = size
         self.position = position
         self.emittingDirection = emittingDirection
+        self.velocity = velocity
+        self.velocityVariation = velocityVariation
+        self.spreadingAngle = spreadingAngle
+        self.damping = damping
     }
 
     /// Initializes options that tint the default confetti images with your own colors.
@@ -110,7 +130,11 @@ extension C3DConfettiOptions {
                            lifeSpan: lifeSpan,
                            size: size,
                            position: position,
-                           emittingDirection: emittingDirection)
+                           emittingDirection: emittingDirection,
+                           velocity: velocity,
+                           velocityVariation: velocityVariation,
+                           spreadingAngle: spreadingAngle,
+                           damping: damping)
     }
 }
 
