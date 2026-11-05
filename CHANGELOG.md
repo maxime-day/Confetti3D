@@ -8,6 +8,11 @@
 - `C3DConfetti.defaultConfetti(colors:)` returns the 8 default confetti shapes with your own palette, ready to mix with your own images.
 - `C3DConfetti(image:color:size:)` gives one element its own size multiplier, on top of the size of the options.
 
+### Fixed
+
+- Confetti and glitter blend by transparency, sorted by distance, instead of writing depth: the transparent corners of an image no longer cut the particles behind it into squares.
+- The camera no longer clips particles that fly close to it.
+
 ## 2.0.2 — 2026-11-05
 
 ### Fixed

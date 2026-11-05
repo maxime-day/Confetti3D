@@ -88,6 +88,7 @@ public final class UIC3DView: SCNView, ConfettiThrower {
         let cameraNode = SCNNode()
         scene.rootNode.addChildNode(cameraNode)
         cameraNode.camera = SCNCamera()
+        cameraNode.camera?.zNear = 0.01
         cameraNode.position = SCNVector3(0, 0.1, 3.5)
         pointOfView = cameraNode
 
@@ -190,8 +191,10 @@ public final class UIC3DView: SCNView, ConfettiThrower {
                 particleSystem.particleSizeVariation = 0.05
                 
                 // Rendering
-                particleSystem.isBlackPassEnabled = true
-                particleSystem.writesToDepthBuffer = true
+                particleSystem.blendMode = .alpha
+                particleSystem.sortingMode = .distance
+                particleSystem.isBlackPassEnabled = false
+                particleSystem.writesToDepthBuffer = false
                 particleSystem.orientationMode = .free
                 
                 // Physics
@@ -258,8 +261,10 @@ public final class UIC3DView: SCNView, ConfettiThrower {
                 particleSystem.particleSizeVariation = 0.005
 
                 // Rendering
-                particleSystem.isBlackPassEnabled = true
-                particleSystem.writesToDepthBuffer = true
+                particleSystem.blendMode = .alpha
+                particleSystem.sortingMode = .distance
+                particleSystem.isBlackPassEnabled = false
+                particleSystem.writesToDepthBuffer = false
                 particleSystem.orientationMode = .free
 
                 // Physics
