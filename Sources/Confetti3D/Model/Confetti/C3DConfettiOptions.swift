@@ -60,6 +60,38 @@ public struct C3DConfettiOptions: Sendable {
         self.position = position
         self.emittingDirection = emittingDirection
     }
+
+    /// Initializes options that tint the default confetti images with your own colors.
+    ///
+    /// Colors are paired with the 8 default images in order, and the images repeat when there are more colors.
+    /// An empty array keeps the default colors.
+    ///
+    /// - Parameters:
+    ///   - colors: The tint colors applied to the default confetti images.
+    ///   - isAffectedByGravity: Whether particles should be influenced by gravity. Defaults to `true`.
+    ///   - birthRate: The number of particles emitted per second. Defaults to `70`.
+    ///   - emissionDuration: The duration during which the emitter releases particles. Defaults to `1` second.
+    ///   - lifeSpan: The lifespan of each confetti particle. Defaults to `10` seconds.
+    ///   - size: A scale factor applied to confetti images. Defaults to `1`.
+    ///   - position: The position of the emitter. Defaults to the scene center.
+    ///   - emittingDirection: The direction of the emitter. Defaults to up.
+    public init(colors: [UIColor],
+                isAffectedByGravity: Bool = true,
+                birthRate: Int = 70,
+                emissionDuration: TimeInterval = 1,
+                lifeSpan: TimeInterval = 10,
+                size: CGFloat = 1,
+                position: SCNVector3 = SCNVector3(0, 0, 0),
+                emittingDirection: SCNVector3 = SCNVector3(0, 1, 0)) {
+        self.init(confetti: Constants.confetti(colors: colors),
+                  isAffectedByGravity: isAffectedByGravity,
+                  birthRate: birthRate,
+                  emissionDuration: emissionDuration,
+                  lifeSpan: lifeSpan,
+                  size: size,
+                  position: position,
+                  emittingDirection: emittingDirection)
+    }
 }
 
 extension C3DConfettiOptions {
@@ -75,23 +107,31 @@ fileprivate enum Constants {
     ///
     /// Each confetti is represented by a unique image located in the module bundle,
     /// and is paired with a specific color overlay to enhance visual diversity.
-    static let defaultConfetti = [
-        C3DConfetti(image: UIImage(named: "confetti_01", in: .module, with: nil)!,
-                    color: .blue),
-        C3DConfetti(image: UIImage(named: "confetti_02", in: .module, with: nil)!,
-                    color: .green),
-        C3DConfetti(image: UIImage(named: "confetti_03", in: .module, with: nil)!,
-                    color: .yellow),
-        C3DConfetti(image: UIImage(named: "confetti_04", in: .module, with: nil)!,
-                    color: .purple),
-        C3DConfetti(image: UIImage(named: "confetti_05", in: .module, with: nil)!,
-                    color: .red),
-        C3DConfetti(image: UIImage(named: "confetti_06", in: .module, with: nil)!,
-                    color: .cyan),
-        C3DConfetti(image: UIImage(named: "confetti_07", in: .module, with: nil)!,
-                    color: UIColor(red: 1, green: 0.1, blue: 0, alpha: 1)), // Orange
-        C3DConfetti(image: UIImage(named: "confetti_08", in: .module, with: nil)!,
-                    color: UIColor(red: 1, green: 0.2, blue: 0, alpha: 1)), // Gold
+    static let defaultConfetti = confetti(colors: defaultColors)
+
+    /// The default confetti shapes, located in the module bundle.
+    static let defaultImages = (1...8).map {
+        UIImage(named: String(format: "confetti_%02d", $0), in: .module, with: nil)!
+    }
+
+    /// The default tint colors, one per default image.
+    static let defaultColors: [UIColor] = [
+        .blue,
+        .green,
+        .yellow,
+        .purple,
+        .red,
+        .cyan,
+        UIColor(red: 1, green: 0.1, blue: 0, alpha: 1), // Orange
+        UIColor(red: 1, green: 0.2, blue: 0, alpha: 1), // Gold
     ]
+
+    /// Pairs each color with a default image, cycling through the images. An empty array uses the default colors.
+    static func confetti(colors: [UIColor]) -> [C3DConfetti] {
+        let colors = colors.isEmpty ? defaultColors : colors
+        return colors.enumerated().map { index, color in
+            C3DConfetti(image: defaultImages[index % defaultImages.count], color: color)
+        }
+    }
 }
 

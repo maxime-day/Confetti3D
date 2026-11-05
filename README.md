@@ -154,6 +154,15 @@ effects.throwConfetti(type: .confetti(C3DConfettiOptions(
 )))
 ```
 
-`C3DGlitterOptions` accepts the same settings. `isAffectedByGravity` enables device-motion updates; both effects also have their own built-in downward acceleration. Images are multiplied by their tint color: use white shapes on a transparent background when you want the specified colors to show accurately.
+To keep the default confetti shapes with your own palette, pass colors only. They are paired with the 8 default images in order:
+
+```swift
+effects.throwConfetti(type: .confetti(C3DConfettiOptions(
+    colors: [.systemPurple, .systemPink, .systemYellow],
+    position: SCNVector3(0, -1, 0)
+)))
+```
+
+`C3DGlitterOptions` accepts the same settings as `C3DConfettiOptions(confetti:)`. `isAffectedByGravity` enables device-motion updates; both effects also have their own built-in downward acceleration. Images are multiplied by their tint color: use white shapes on a transparent background when you want the specified colors to show accurately.
 
 See [CHANGELOG.md](CHANGELOG.md) for the release notes.

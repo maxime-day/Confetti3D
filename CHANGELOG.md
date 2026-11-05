@@ -1,6 +1,12 @@
 # Changelog
 
-## Unreleased
+## 2.0.1 — 2026-11-05
+
+### Added
+
+- `C3DConfettiOptions(colors:)` tints the 8 default confetti images with your own palette, keeping every other setting.
+
+### Changed
 
 - Remove the test target and test sources from the package.
 
